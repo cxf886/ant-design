@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run: TEST_TYPE=lint 
       - run: sh ./scripts/install-react.sh
-      - run: sh ./scripts/travis-script.sh
+      - run: npm run lint
   REACT=16_TEST_TYPE=test:dist:
     docker:
       - image: circleci/node:8.11.2
