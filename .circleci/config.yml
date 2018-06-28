@@ -15,7 +15,24 @@ jobs:
       - run: npm install
       - run: npm run dist
       - run: node ./tests/dekko/dist.test.js
-      - run: LIB_DIR=dist npm test -- -w 2 $*
+      - run: LIB_DIR=dist npm test
+  REACT=16_test:es:
+    docker:
+      - image: circleci/node:8.11.2
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run dist
+      - run: LIB_DIR=es run_test
+  REACT=16_test:lib:
+    docker:
+      - image: circleci/node:8.11.2
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run dist
+      - run:  node ./tests/dekko/lib.test.js
+      - run: LIB_DIR=lib run_test
 workflows:
   version: 2
   build_and_test:
