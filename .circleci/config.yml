@@ -21,4 +21,4 @@ workflows:
   build_and_test:
     jobs:
       - TEST_TYPE=lint
-      - REACT=16_TEST_TYPE=test:dist
+      - REACT=16_test:dist
