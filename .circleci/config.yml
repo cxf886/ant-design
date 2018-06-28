@@ -5,19 +5,17 @@ jobs:
       - image: circleci/node:8.11.2
     steps:
       - checkout
-      - run: TEST_TYPE=lint 
       - run: npm install
-      - run: sh ./scripts/install-react.sh
       - run: npm run lint
-  REACT=16_TEST_TYPE=test:dist:
+  REACT=16_test:dist:
     docker:
       - image: circleci/node:8.11.2
     steps:
       - checkout
-      - run: REACT=16 TEST_TYPE=test:dist
       - run: npm install
-      - run: sh ./scripts/install-react.sh
-      - run: sh ./scripts/travis-script.sh
+      - run: npm run dist
+      - run: node ./tests/dekko/dist.test.js
+      - run: LIB_DIR=dist npm test -- -w 2 $*
 workflows:
   version: 2
   build_and_test:
