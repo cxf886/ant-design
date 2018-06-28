@@ -1,0 +1,24 @@
+version: 2
+jobs:
+  TEST_TYPE=lint:
+    docker:
+      - image: circleci/node:8.11.2
+    steps:
+      - checkout
+      - run: TEST_TYPE=lint 
+      - run: sh ./scripts/install-react.sh
+      - run: sh ./scripts/travis-script.sh
+  REACT=16_TEST_TYPE=test:dist:
+    docker:
+      - image: circleci/node:8.11.2
+    steps:
+      - checkout
+      - run: REACT=16 TEST_TYPE=test:dist
+      - run: sh ./scripts/install-react.sh
+      - run: sh ./scripts/travis-script.sh
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - TEST_TYPE=lint
+      - REACT=16_TEST_TYPE=test:dist
