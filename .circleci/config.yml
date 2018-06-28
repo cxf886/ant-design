@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: TEST_TYPE=lint 
+      - run: npm install
       - run: sh ./scripts/install-react.sh
       - run: npm run lint
   REACT=16_TEST_TYPE=test:dist:
@@ -14,6 +15,7 @@ jobs:
     steps:
       - checkout
       - run: REACT=16 TEST_TYPE=test:dist
+      - run: npm install
       - run: sh ./scripts/install-react.sh
       - run: sh ./scripts/travis-script.sh
 workflows:
